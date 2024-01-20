@@ -57,9 +57,8 @@ framework = arduino
 ; uncomment this line if you get low memory error but you'll loose OTA capability
 ;board_build.partitions = huge_app.csv
 
-;lib_deps = 
-;  https://github.com/bogde/HX711
-;  https://github.com/nkolban/ESP32_BLE_Arduino
+lib_deps = 
+  https://github.com/olkal/HX711_ADC
 ```
 <br>
 
