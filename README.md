@@ -75,13 +75,11 @@ float weight = scale.get_units();
 bleDev.broadcastWeight(weight);
 ```
 
-See the full code in the GitHub repository.
-
 **Step 5: Upload the Firmware**
 
 With everything wired up and coded, upload the firmware to your ESP32 via USB.
 
-**Step 6: Test It Out**
+**Step 6: Test It Out and Calibration**
 
 Place some known weights on the scale and verify the readings are accurate. Check that the values are being broadcast over BLE as expected.
 
