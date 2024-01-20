@@ -39,11 +39,15 @@ In `platformio.ini`, add dependencies for the HX711 and BLE Arduino libraries:
 ```ini
 [env:esp32dev]
 platform = espressif32
-board = ...
+board = esp32dev
+framework = arduino
 
-lib_deps =
-  https://github.com/bogde/HX711
-  https://github.com/nkolban/ESP32_BLE_Arduino
+; uncomment port config for linux platform
+; upload_port = /dev/ttyACM0
+; upload_speed = 115200
+
+; uncomment this line if you get low memory error
+; board_build.partitions = huge_app.csv
 ```
 
 **Step 4: Write the Code:**
