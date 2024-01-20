@@ -47,12 +47,16 @@ board = esp32dev
 framework = arduino
 
 ; uncomment port config for linux platform
-; upload_port = /dev/ttyACM0
-; upload_speed = 115200
+;upload_port = /dev/ttyACM0
+;upload_speed = 115200
 
 ; BLE stack requires a huge space
 ; uncomment this line if you get low memory error but you'll loose OTA capability
-; board_build.partitions = huge_app.csv
+;board_build.partitions = huge_app.csv
+
+;lib_deps = 
+;  https://github.com/bogde/HX711
+;  https://github.com/nkolban/ESP32_BLE_Arduino
 ```
 <br>
 
