@@ -50,7 +50,8 @@ framework = arduino
 ; upload_port = /dev/ttyACM0
 ; upload_speed = 115200
 
-; uncomment this line if you get low memory error
+; BLE stack requires a huge space
+; uncomment this line if you get low memory error but you'll loose OTA capability
 ; board_build.partitions = huge_app.csv
 ```
 <br>
