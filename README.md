@@ -8,10 +8,12 @@ Tracking your weight goals and progress can be difficult without accurate data. 
 
 1. ESP32 Development Board
 2. Load Cell and HX711 Amplifier
-3. PlatformIO IDE installed
+3. VSCode with PlatformIO IDE installed
 4. Wiring diagram:
+<br>
 
-[Schematic diagram]
+![Schematic diagram](connection_diagram.png)
+<br><br>
 
 **Step 1: Set Up PlatformIO:**
 
