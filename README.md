@@ -24,15 +24,18 @@ We'll use PlatformIO as the IDE to code and upload the firmware to the ESP32. In
 
 Follow the wiring diagram above to connect the ESP32 with the load cell, HX711 amplifier and Bluetooth BLE module. Some key connections:
 
-- HX711 CLK pin to ESP32 GPIO 14
-- HX711 DOUT pin to ESP32 GPIO 27
+- HX711 CLK pin to ESP32 GPIO 23
+- HX711 DOUT pin to ESP32 GPIO 22
 
 Initialize the components:
 
 ```arduino
-HX711 scale;
+HX711_ADC LoadCell(DT, SCK);
 
-BLEDevice bleDev;
+BLEServer* pServer = NULL;
+BLECharacteristic* pCharacteristic = NULL;
+BLEDescriptor *pDescr;
+BLE2902 *pBLE2902;
 ```
 <br>
 
