@@ -94,4 +94,5 @@ Place some known weights on the scale and verify the readings are accurate. Chec
 **Conclusion**
 
 In this project, we built a smart Bluetooth-BLE scale with an ESP32 and load cell sensor. Stay tuned for a future guide on developing an Android app to display and track the weight data. 
+
 Let me know if you have any other questions!
