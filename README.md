@@ -8,16 +8,17 @@ Tracking your weight goals and progress can be difficult without accurate data. 
 
 1. ESP32 Development Board
 2. Load Cell and HX711 Amplifier
-3. VSCode with PlatformIO IDE installed
+3. VSCode with PlatformIO (IDE) installed
 4. Wiring diagram:
 <br>
 
 ![Schematic diagram](connection_diagram.png)
 <br><br>
 
-**Step 1: Set Up PlatformIO:**
+**Step 1: Set Up VSCode with PlatformIO:**
 
 We'll use PlatformIO as the IDE to code and upload the firmware to the ESP32. Install VSCOde and PlatformIO extension to get started. Create a new project for your smart scale application.
+<br><br>
 
 **Step 2: Connect the Hardware:**
 
@@ -33,6 +34,7 @@ HX711 scale;
 
 BLEDevice bleDev;
 ```
+<br>
 
 **Step 3: Install Libraries:**
 
@@ -51,6 +53,7 @@ framework = arduino
 ; uncomment this line if you get low memory error
 ; board_build.partitions = huge_app.csv
 ```
+<br>
 
 **Step 4: Write the Code:**
 
@@ -76,14 +79,17 @@ float weight = scale.get_units();
 // Broadcast via BLE
 bleDev.broadcastWeight(weight);
 ```
+<br>
 
 **Step 5: Upload the Firmware**
 
 With everything wired up and coded, upload the firmware to your ESP32 via USB.
+<br><br>
 
 **Step 6: Test It Out and Calibration**
 
 Place some known weights on the scale and verify the readings are accurate. Check that the values are being broadcast over BLE as expected.
+<br><br>
 
 **Conclusion**
 
