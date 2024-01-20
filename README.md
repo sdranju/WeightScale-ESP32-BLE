@@ -65,9 +65,9 @@ Our weight scale BLE device will have a "Weight Measurement" service with the st
 Initialize the components:
 
 ```arduino
-// Standard UUID's for BLE Weight Scale
-#define SERVICE_UUID        "0000181D-0000-1000-8000-00805f9b34fb"
-#define MEASURE_CHAR_UUID   "00002A9D-0000-1000-8000-00805f9b34fb"
+// HX711 connection pins
+#define SCK  23  //SCK OUTPUT
+#define DT   22  //DT INPUT
 
 HX711_ADC LoadCell(DT, SCK);
 
