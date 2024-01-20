@@ -96,8 +96,11 @@ Set up the HX711 scale and calibrate the sensor readings:
     Serial.println("\nSetting CalFactor...");
     LoadCell.setCalFactor(preSetCalibValue);  // set calibration value
   }
+```
 
-  //initialize BLE server
+Setup and initialize BLE server:
+
+```arduino
   const char* dev_name = "WEIGHT-SCALE";  // set device name
 
   // Create the BLE Device
@@ -143,11 +146,77 @@ Set up the HX711 scale and calibrate the sensor readings:
 Read the weight and broadcast via BLE:
 
 ```arduino
-// Get weight data
-float weight = scale.get_units();
+void loop() {
+  // Get weight data
+  float weightData = get_weigh();
 
-// Broadcast via BLE
-bleDev.broadcastWeight(weight);
+  // Broadcast via BLE
+  if (deviceConnected) {  
+    prepare_weight_for_ble(abs(weightData));
+  }
+}
+
+// Sets our BLE Characteristic given a weight measurement (in kg)
+// as per GATT standard
+void prepare_weight_for_ble(long weightInGram) {
+  uint16_t newVal = 0;           // field value: weight in BLE format
+  unsigned char flags = 0;       // description of the weight
+  unsigned char bytes[3] = {0};  // encoded data for transmission
+  
+  /*
+   * Set the flags:
+   * bit 0 => 0 means we're reporting in SI units (kg and meters)
+   * bit 1 => 0 means there is no timestamp in our report
+   * bit 2 => 0 means there is no User ID in our report
+   * bit 3 => 0 means no BMI and Height data are present in our report
+   * bits 4 to 7 are reserved, and set to zero
+   */
+
+  flags |= 0x0 << 0;
+  flags |= 0x0 << 1;
+  flags |= 0x0 << 2;
+  flags |= 0x0 << 3;
+  
+  // Important: Convert the weight into BLE representation
+  newVal = (uint16_t)((weightInGram / 5) + 0.5);
+
+  /*
+   * We set the value and notify the BLE Client every time we make a measurement, 
+   * even if the value hasn't been changed.
+   */
+
+  bytes[0] = flags;
+
+  // BLE GATT multi-byte values are encoded Least-Significant Byte first
+  bytes[1] = (unsigned char) newVal;
+  bytes[2] = (unsigned char) (newVal >> 8);
+
+  pCharacteristic->setValue(bytes, sizeof(bytes));
+  pCharacteristic->notify();
+}
+
+//get weight from loadcell
+float get_weigh() {
+  static boolean newDataReady = false;
+  static float newWeigh = 0.0;
+
+  // Check for new data
+  if (LoadCell.update()) {
+    newDataReady = true;
+  }
+
+  // Get weight from the sensor
+  if (newDataReady) {
+    newWeigh = LoadCell.getData();
+    if (abs(newWeigh) < 20.0) {  // kill small fluctuation
+      newWeigh = 0.0;
+    }
+    newDataReady = false;
+  }
+
+  return newWeigh;
+}
+
 ```
 <br>
 
@@ -156,13 +225,13 @@ bleDev.broadcastWeight(weight);
 With everything wired up and coded, upload the firmware to your ESP32 via USB.
 <br><br>
 
-**Step 6: Test It Out and Calibration**
+**Step 6: Calibrate and Test It Out**
 
 Place some known weights on the scale and verify the readings are accurate. Check that the values are being broadcast over BLE as expected.
 <br><br>
 
 **Conclusion**
 
-In this project, we built a smart Bluetooth-BLE scale with an ESP32 and load cell sensor. Stay tuned for a future guide on developing an Android app to display and track the weight data. 
+In this project, we built a smart Bluetooth-connected scale with an ESP32 and load cell sensor. Stay tuned for a future guide on developing an Android app to display and track the weight data. 
 
 Let me know if you have any other questions!
