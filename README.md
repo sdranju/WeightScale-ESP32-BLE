@@ -8,15 +8,14 @@ Tracking your weight goals and progress can be difficult without accurate data. 
 
 1. ESP32 Development Board
 2. Load Cell and HX711 Amplifier
-3. Bluetooth BLE Module
-4. PlatformIO IDE installed
-5. Wiring diagram:
+3. PlatformIO IDE installed
+4. Wiring diagram:
 
 [Schematic diagram]
 
 **Step 1: Set Up PlatformIO:**
 
-We’ll use PlatformIO as the IDE to code and upload the firmware to the ESP32. Install PlatformIO and its VSCode extension to get started. Create a new project for your smart scale application.
+We'll use PlatformIO as the IDE to code and upload the firmware to the ESP32. Install VSCOde and PlatformIO extension to get started. Create a new project for your smart scale application.
 
 **Step 2: Connect the Hardware:**
 
@@ -24,8 +23,6 @@ Follow the wiring diagram above to connect the ESP32 with the load cell, HX711 a
 
 - HX711 CLK pin to ESP32 GPIO 14
 - HX711 DOUT pin to ESP32 GPIO 27
-- BLE module RX to ESP32 GPIO 16
-- BLE module TX to ESP32 GPIO 17
 
 Initialize the components:
 
@@ -86,4 +83,5 @@ Place some known weights on the scale and verify the readings are accurate. Chec
 
 **Conclusion**
 
-In this project, we built a smart Bluetooth-connected scale with an ESP32 and load cell sensor. The complete code can be found on GitHub. Stay tuned for a future guide on developing an Android app to display and track the weight data. Let me know if you have any other questions!
+In this project, we built a smart Bluetooth-BLE scale with an ESP32 and load cell sensor. Stay tuned for a future guide on developing an Android app to display and track the weight data. 
+Let me know if you have any other questions!
